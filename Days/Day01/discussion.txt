@@ -1,0 +1,5 @@
+2684. Power of a Number
+2811. List Prime Numbers up to N
+2676. Palindrome Number
+2675. Reverse a Number
+281. Trailing Zeroes in Factorial: Count
