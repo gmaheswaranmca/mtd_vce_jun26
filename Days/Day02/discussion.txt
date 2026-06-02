@@ -1,0 +1,44 @@
+def two_sum(nums, target):
+    d = {}
+    for index, num in enumerate(nums):
+        diff = target - num 
+        if diff in d:
+            return [d[diff], index]
+        d[num] = index 
+
+    return [-1, -1]
+
+print(two_sum([2,7,11,15], 18))
+
+
+nums          target 
+[2,7,11,15]    18
+
+d {} -> {2:0, 7:1}
+index num diff diff in d
+0     2   16    False 
+1     7   11    False 
+2    11   7     True    1, 2
+
+
+
+n, nums
+
+large_sum = MIN_NUM
+for I <- 0 .. n-1
+    s = nums[I]
+    for J <- I+1 ..n-1
+        if s > large_sum
+            large_sum = s
+        s = s + nums[I]
+    if s > large_sum 
+        large_sum = s
+
+    
+
+
+
+
+-2 [1] -3 4 -1 2 1 -5 4
+
+large_sum = -999->-2->-1->0->1->2
