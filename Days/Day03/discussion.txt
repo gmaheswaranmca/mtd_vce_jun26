@@ -117,7 +117,17 @@ print(groupAnagrams(names))
 
 
 6
-eat tea tan ate nat bat
+eat '' tan '' '' bat
+
+groups = [['eat', tea', 'ate'], ['tan', 'nat'], ['bat']]
+group = 
+I   J 
+0   1..5
+1   
+2   3..5
+3
+4
+5   6..5
 
 
 
