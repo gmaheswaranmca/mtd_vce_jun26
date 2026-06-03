@@ -17,5 +17,5 @@ def groupAnagrams(names):
         all_groups.append(group)
     return all_groups 
 groups = groupAnagrams(names)
-groups_str = [f'[{', '.join(group)}]' for group in groups]
+groups_str = [f"[{', '.join(group)}]" for group in groups]
 print('[' + ', '.join(groups_str) + ']')

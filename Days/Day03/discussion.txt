@@ -130,4 +130,22 @@ I   J
 5   6..5
 
 
+s = input()
+t = input()
+def containsT(substr, t):
+    for ch in substr: 
+        if ch not in t: 
+            return False 
+    return True 
 
+def minWinStr(s, t):
+    minStr = s
+    n = len(s)
+    for I in range(n):
+        for J in range(I,n):
+            substr = s[I:J+1]
+            if containsT(substr, t):
+                if len(substr) < len(longest):
+                    minStr = substr
+    return minStr
+print(minWinStr(s, t))
