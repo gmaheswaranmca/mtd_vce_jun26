@@ -1,0 +1,97 @@
+abcde
+ace
+   _
+
+def containsSeq(S, T):
+    I = 0
+    J = 0
+    n = len(S)
+    m = len(T)
+    while I < n and J < m:
+        if S[I] == T[J]:
+            J += 1
+        I += 1
+    return m == J
+S = input()
+T = input()
+print('Yes' if containsSeq(S,T) else 'No')
+
+
+
+
+nums = 5,3,7,9,5
+                 -
+       7 9 5 3 7
+K = 12
+visited = <set>{5, 3,7,9}
+pairs = [(5,7), (3,9)]
+
+def findPairs(nums, k):
+    n = len(nums)
+    visited = set()
+    pairs = []
+    for num in nums:
+        complement = k - num 
+        if complement in visited: 
+            pair = tuple(sorted((complement, num)))
+            if pair not in pairs:
+                pairs.append(pair)
+        visited.add(num)
+    return list(sorted(pairs))
+n = int(input())
+nums = [int(num_str) for num_str in input().split(' ')][:n]
+k = input()
+pairs = findPairs()
+for pair in pairs:
+    print(pair)
+
+---
+
+def reverseSentence(sentence):
+    words = sentence.split(' ')
+    r_sentence = ''
+    for word in words:
+        r_sentence += reversed(word)
+    return(r_sentence)
+
+sentence = input()
+print(reverseSentence(sentence))
+
+
+
+
+---
+
+
+5
+3 0 2 0 4
+0 3 1 3 0      water 0 + 3 + 1 + 3 + 0 = 7
+3 : [min(3,4) = 3] - 3 = 0
+0 : [min(3,4) = 3] - 0 = 3
+2 : [min(3,4) = 3] - 2 = 1
+0 : [min(3,4) = 3] - 0 = 3
+4 : [min(4,4) = 4] - 4 = 0
+
+
+
+
+def collectWater(heights):
+    n = len(heights)
+    leftMax = [0] * n
+    rightMax = [0] * n
+
+    leftMax[0] = heights[0]
+    for I in range(1, n):
+        leftMax[I] = max(leftMax[I-1], heights[I])
+
+    rightMax[n-1] = heights[n-1]
+    for I in range(n-2, -1, -1):
+        rightMax[I] = max(rightMax[I+1], heights[I])
+
+    water = 0
+    for I in range(n): 
+        water += min(leftMax[I], rightMax[I]) - heights[I]
+    return water 
+n = int(input())
+heights = [int(h_str) for h_str in input().split(' ')][:n]
+print(collectWater(heights))
