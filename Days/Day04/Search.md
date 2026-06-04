@@ -42,6 +42,7 @@ Binary search is an efficient searching algorithm that works on sorted arrays by
 1. Set low = 0, high = array.length - 1
 2. While low <= high:
    - Calculate mid = (low + high) / 2
+             - mid = low + ((high - low) / 2)
    - If arr[mid] == target, return mid
    - If arr[mid] < target, set low = mid + 1
    - If arr[mid] > target, set high = mid - 1
