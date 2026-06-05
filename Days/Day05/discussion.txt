@@ -1,0 +1,146 @@
+So far, 
+    Category :
+        - Mathematical
+        - Array 
+        - String 
+
+        Brute Force
+            Two Pointer
+            Prefix/Suffix Sum 
+            Hashing 
+
+Searching and Sorting 
+    Searching 
+        - Linear
+        - Binary 
+        - Ternary 
+    Sorting 
+        - Bubble 
+        - Selection 
+        * Insertion - Done 
+        * Quick - 
+---
+
+64, 34, 25, 12, 22, 11, 90
+
+38, 27, 43, 3, 9, 82, 10
+
+
+Pseudocode - insertion sort 
+subroutine doSort(nums, n) 
+    for i <- 1 .. n-1
+        out = nums[i]
+        j = i - 1
+        while j >= 0 && nums[j] > out
+            nums[j+1] = nums[j]
+            j --
+        if i != (j + 1)
+            nums[j + 1] = out
+---
+cpp imple:
+
+#include<iostream>
+#include<vector>
+using namespace std;
+void doSort(vector<int>& nums, int n) {
+    for(int I = 1; I < n; I++) {
+        int taken = nums[I];
+        int J = I - 1;
+        while( J >= 0 && nums[J] > taken) {
+            nums[J+1] = nums[J];
+            J--;
+        }
+        if( I != (J + 1)) {
+            nums[J + 1] = taken;
+        }
+    }
+}
+
+int main() {
+    int n;
+    vector<int> nums;
+    cin >> n;
+    for(int I = 0; I < n; I++) {
+        int num;
+        cin >> num;
+        nums.push_back(num);
+    }
+    doSort(nums, n);
+    for(int I = 0; I < n; I++) {
+        if(I == (n-1)) {
+            cout << nums[I];
+        } else {
+            cout << nums[I] << " ";
+        }
+    }
+    return 0;
+}
+
+---
+
+Quick Sort: 
+
+Algorithm:
+Choose a pivot element
+Partition array so elements < pivot are on left, > pivot on right
+Recursively apply quicksort to left and right subarrays
+Combine results
+
+---
+pseudo:
+FUNCTION Partition(arr, low, high)
+    pivot ← arr[high]
+    i ← low - 1
+
+    FOR j ← low TO high - 1
+        IF arr[j] ≤ pivot THEN
+            i ← i + 1
+
+            temp ← arr[i]
+            arr[i] ← arr[j]
+            arr[j] ← temp
+        END IF
+    END FOR
+    IF (i + 1) != high THEN
+        temp ← arr[i + 1]
+        arr[i + 1] ← arr[high]
+        arr[high] ← temp
+    END IF
+    RETURN i + 1
+END FUNCTION
+FUNCTION QuickSort(arr, low, high)
+    IF low < high THEN
+        pivotIndex ← Partition(arr, low, high)
+        QuickSort(arr, low, pivotIndex - 1)
+        QuickSort(arr, pivotIndex + 1, high)
+    END IF
+END FUNCTION
+
+
+
+
+
+Time Complexity:
+    Best Case: O(n log n) - Pivot divides array into equal halves
+    Average Case: O(n log n)
+    Worst Case: O(n²) - Pivot is always smallest/largest element
+Space Complexity: O(log n) - Due to recursion stack
+Characteristics:
+    Stable: No (depends on partition implementation)
+    In-place: Yes
+    Adaptive: No
+Advantages:
+    Very efficient on average O(n log n)
+    In-place sorting
+    Widely used in practice
+    Cache-friendly
+Disadvantages:
+    Worst-case O(n²) time complexity
+    Not stable
+    Performance depends on pivot selection
+
+64, 34, 25, 12, 22, 11, 90
+38, 27, 43, 3, 9, 82, 10
+170, 45, 75, 90, 802, 24, 2, 66
+nums = 10 7 8 9 1 5
+
