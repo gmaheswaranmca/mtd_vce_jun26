@@ -144,3 +144,291 @@ Disadvantages:
 170, 45, 75, 90, 802, 24, 2, 66
 nums = 10 7 8 9 1 5
 
+---
+
+Merge Sort is a divide-and-conquer algorithm that divides the array into halves, sorts them, and then merges them back.
+
+Algorithm:
+    Divide array into two halves
+    Recursively sort both halves
+    Merge the sorted halves
+Time Complexity:
+    Best Case: O(n log n)
+    Average Case: O(n log n)
+    Worst Case: O(n log n) - Consistent performance
+Space Complexity: O(n) - Requires additional space for temporary arrays
+Characteristics:
+    Stable: Yes
+    In-place: No
+    Adaptive: No
+Advantages:
+    Guaranteed O(n log n) time complexity
+    Stable sorting algorithm
+    Predictable performance
+    Good for large datasets
+    Parallelizable
+Disadvantages:
+    Requires O(n) extra space
+    Not in-place
+Slower than quicksort in practice for smaller arrays
+
+FUNCTION Merge(arr, left, mid, right)
+    CREATE temp[]
+
+    i ← left
+    j ← mid + 1
+
+    WHILE i ≤ mid AND j ≤ right
+        IF arr[i] ≤ arr[j] THEN
+            APPEND arr[i] TO temp
+            i ← i + 1
+        ELSE
+            APPEND arr[j] TO temp
+            j ← j + 1
+        END IF
+    END WHILE
+
+    WHILE i ≤ mid
+        APPEND arr[i] TO temp
+        i ← i + 1
+    END WHILE
+
+    WHILE j ≤ right
+        APPEND arr[j] TO temp
+        j ← j + 1
+    END WHILE
+
+    COPY temp BACK TO arr[left...right]
+END FUNCTION
+
+FUNCTION MergeSort(arr, left, right)
+    IF left < right THEN
+        mid ← (left + right) / 2
+
+        MergeSort(arr, left, mid)
+        MergeSort(arr, mid + 1, right)
+
+        Merge(arr, left, mid, right)
+    END IF
+END FUNCTION
+
+## C++
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void merge(vector<int>& arr, int left, int mid, int right)
+{
+    vector<int> temp;
+
+    int i = left;
+    int j = mid + 1;
+
+    while (i <= mid && j <= right)
+    {
+        if (arr[i] <= arr[j])
+        {
+            temp.push_back(arr[i]);
+            i++;
+        }
+        else
+        {
+            temp.push_back(arr[j]);
+            j++;
+        }
+    }
+
+    while (i <= mid)
+    {
+        temp.push_back(arr[i]);
+        i++;
+    }
+
+    while (j <= right)
+    {
+        temp.push_back(arr[j]);
+        j++;
+    }
+
+    for (int k = 0; k < temp.size(); k++)
+    {
+        arr[left + k] = temp[k];
+    }
+}
+
+void mergeSort(vector<int>& arr, int left, int right)
+{
+    if (left < right)
+    {
+        int mid = left + (right - left) / 2;
+
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+
+        merge(arr, left, mid, right);
+    }
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+
+    vector<int> arr(n);
+
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+
+    mergeSort(arr, 0, n - 1);
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i];
+
+        if (i < n - 1)
+            cout << " ";
+    }
+
+    return 0;
+}
+```
+
+---
+
+## Java
+
+```java
+import java.util.*;
+
+public class Main
+{
+    public static void merge(int[] arr, int left, int mid, int right)
+    {
+        List<Integer> temp = new ArrayList<>();
+
+        int i = left;
+        int j = mid + 1;
+
+        while (i <= mid && j <= right)
+        {
+            if (arr[i] <= arr[j])
+            {
+                temp.add(arr[i]);
+                i++;
+            }
+            else
+            {
+                temp.add(arr[j]);
+                j++;
+            }
+        }
+
+        while (i <= mid)
+        {
+            temp.add(arr[i]);
+            i++;
+        }
+
+        while (j <= right)
+        {
+            temp.add(arr[j]);
+            j++;
+        }
+
+        for (int k = 0; k < temp.size(); k++)
+        {
+            arr[left + k] = temp.get(k);
+        }
+    }
+
+    public static void mergeSort(int[] arr, int left, int right)
+    {
+        if (left < right)
+        {
+            int mid = left + (right - left) / 2;
+
+            mergeSort(arr, left, mid);
+            mergeSort(arr, mid + 1, right);
+
+            merge(arr, left, mid, right);
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+
+        for (int i = 0; i < n; i++)
+        {
+            arr[i] = sc.nextInt();
+        }
+
+        mergeSort(arr, 0, n - 1);
+
+        for (int i = 0; i < n; i++)
+        {
+            System.out.print(arr[i]);
+
+            if (i < n - 1)
+                System.out.print(" ");
+        }
+    }
+}
+```
+
+---
+
+## Python
+
+```python
+def merge(arr, left, mid, right):
+    temp = []
+
+    i = left
+    j = mid + 1
+
+    while i <= mid and j <= right:
+        if arr[i] <= arr[j]:
+            temp.append(arr[i])
+            i += 1
+        else:
+            temp.append(arr[j])
+            j += 1
+
+    while i <= mid:
+        temp.append(arr[i])
+        i += 1
+
+    while j <= right:
+        temp.append(arr[j])
+        j += 1
+
+    for k in range(len(temp)):
+        arr[left + k] = temp[k]
+
+
+def merge_sort(arr, left, right):
+    if left < right:
+        mid = (left + right) // 2
+
+        merge_sort(arr, left, mid)
+        merge_sort(arr, mid + 1, right)
+
+        merge(arr, left, mid, right)
+
+
+n = int(input())
+arr = list(map(int, input().split()))
+
+merge_sort(arr, 0, n - 1)
+
+print(*arr)
+```
