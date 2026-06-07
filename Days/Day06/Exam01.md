@@ -6,9 +6,8 @@ We need to find a year from the given list that minimizes the maximum distance t
 
 For any chosen year:
 
-[
-\text{maxDiff} = \max(|year-y|)
-]
+maxDiff = max(|year-y|)
+
 
 The optimal year is the one closest to the middle of the sorted years.
 

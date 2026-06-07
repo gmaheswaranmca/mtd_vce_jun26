@@ -40,32 +40,22 @@ Finally:
 
 ```text
 FUNCTION isValid(s)
-
     stack ← empty
 
     FOR each ch in s
-
         IF ch is '(' OR '{' OR '['
             PUSH ch into stack
-
         ELSE
-
             IF stack is empty
                 RETURN False
-
             top ← POP stack
-
             IF ch = ')' AND top ≠ '('
                 RETURN False
-
             IF ch = '}' AND top ≠ '{'
                 RETURN False
-
             IF ch = ']' AND top ≠ '['
                 RETURN False
-
     RETURN stack is empty
-
 END FUNCTION
 ```
 
@@ -250,29 +240,21 @@ return minStack.top
 
 ```text
 CLASS MinStack
-
     stack
     minStack
 
     FUNCTION push(x)
-
         PUSH x into stack
 
         IF minStack empty OR
            x <= TOP(minStack)
-
             PUSH x into minStack
-
     FUNCTION pop()
-
         IF TOP(stack) = TOP(minStack)
             POP minStack
-
         POP stack
-
     FUNCTION top()
         RETURN TOP(stack)
-
     FUNCTION getMin()
         RETURN TOP(minStack)
 ```

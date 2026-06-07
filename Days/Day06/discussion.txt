@@ -1,0 +1,214 @@
+Exam Qns:
+
+Minimize Maximum Year Difference {easy}
+    - Igor joined several groups in "TheContact!". Each group is named after a
+    student's university entrance year.
+    - Igor joins the group corresponding to his own entrance year.
+    - He also joins all groups with entrance years differing from his by at most `x`.
+    The value of `x` is the same for all students.
+    - Given a list of group names (years) Igor joined, determine Igor's university
+    entrance year. It is guaranteed the list uniquely defines the entrance year.
+    - Find the entrance year that minimizes the maximum difference between itself
+    and the other years in the list.
+    - In other words, if `arr` is the list of years, find `year` in `arr` minimizing
+    `max(abs(year - y))` for `y` in `arr`.
+
+    3
+    2014 2016 2015
+
+    o/p 
+    2015
+
+    Explanation
+    The input list of years is [2014, 2016, 2015].
+    If Igor's year is 2014, the max difference is max(0, 2, 1) = 2.
+    If Igor's year is 2015, the max difference is max(1, 1, 0) = 1.
+    If Igor's year is 2016, the max difference is max(2, 0, 1) = 2.
+    The minimum of [2, 1, 2] is 1, which corresponds to the year 2015.
+
+
+Scrambled Prescription Validator (Anagram Checker) {easy}
+    A hospital pharmacy system receives digital prescriptions where medicine
+    names can sometimes get scrambled during transmission. A pharmacist needs
+    to verify whether a received medicine name is simply a rearrangement of the
+    original prescribed name — meaning both names contain exactly the same
+    characters in the same frequency, just possibly in a different order.
+    Given two strings `original` and `received`, return `true` if `received` is an
+    anagram of `original` (i.e., both strings contain the exact same characters with
+    the same frequencies), and `false` otherwise.
+
+    listen
+    silent
+
+    o/p 
+    true
+
+    Explanation
+    original = "listen", received = "silent"
+    Both strings have length 6, so they could potentially be anagrams
+    Character frequencies in "listen": l=1, i=1, s=1, t=1, e=1, n=1
+    Character frequencies in "silent": s=1, i=1, l=1, e=1, n=1, t=1
+    All character frequencies match exactly
+    Since every character appears the same number of times in both strings, received is a valid anagram of original
+    Hence the output is true
+
+Broken Keyboard Decoder {easy}
+    A keyboard is malfunctioning such that any key might be held down longer than
+    intended, causing a character to appear one or more consecutive times instead
+    of exactly once. Given the intended string and the actually typed string,
+    determine whether the typed string could be a valid long-pressed version of the
+    intended string. Each character in the intended string must appear in the typed
+    string in the same order, and any character may be repeated one or more
+    consecutive times in the typed string.
+
+    alex
+    aaleex
+
+    o/p: True
+
+    Explanation
+    Compare the first character of the intended string (alex) which is a, with characters in the typed string (aaleex). The typed string starts with aa. This is valid as a is repeated.
+    Move to the next character of the intended string, which is l. The next character in the typed string is l. This is valid.
+    Move to the next character of the intended string, which is e. The next characters in the typed string are ee. This is valid as e is repeated.
+    Move to the last character of the intended string, which is x. The next character in the typed string is x. This is valid.
+    All characters from the intended string have been successfully matched in order with corresponding characters (which may be repeated) in the typed string. No extra characters remain in the typed string unmatched. Therefore, the output is True.
+
+
+---
+FUNCTION CountingSort(arr, n, exp):
+    create output arr 
+    create freq map 
+    for each e in arr:
+        digit ← (arr[i] / exp) MOD 10
+        if digit in freq
+            freq[digit].append(e)
+        else 
+            freq[digit] = empty arr 
+            freq[digit].append(e)
+    for i <- 0..9
+        if freq has i:
+            for e in freq[i]
+                output.append(e)
+    for i <- 0..n-1
+        arr[i] = output[i] 
+
+
+void countingSort(vector<int>& arr, int n, int exp)
+{
+    map<int,vector<int>> freq; 
+
+    for(int I; I < n; I++) {
+        int digit = (arr[I] / exp) % 10;
+        if(freq.contains(digit)) {
+            auto& digitArr = freq[digit];
+            digitArr.push_back(arr[I]);
+            freq[digit] = digitArr;
+        } else {
+            vector<int> digitArr;
+            digitArr.push_back(arr[I]);
+            freq[digit] = digitArr;
+        }
+    }
+
+    int J = 0;
+    for (int I = 0; I <= 9; I++) {
+        if(freq.contains(I)) {
+            const auto& digitArr = freq[e];
+            for(const auto& e : digitArr){
+                arr[J] = e;
+                J++;
+            }  
+        }             
+    }
+}
+
+ ---
+
+ /******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <print>
+#include <iostream>
+#include <vector>
+#include <map>
+using namespace std;
+void countingSort(vector<int>& arr, int n, int expo)
+{
+    map<int,char> d = {{5,'s'}, {6,'y'}}; 
+    cout << endl << d[5];
+    cout << endl << d.contains(5);
+    //d.insert({8,'a'});
+    d[8] = 'a';
+    cout << endl << d[8] << endl;
+    /*
+    map<int,vector<int>> freq; 
+
+    for(int I; I < n; I++) {
+        int digit = (arr[I] / expo) % 10;
+        if(freq.count(digit) > ) { //if(freq.contains(digit)) {
+            auto& digitArr = freq[digit];
+            digitArr.push_back(arr[I]);
+            freq[digit] = digitArr;
+        } else {
+            vector<int> digitArr;
+            digitArr.push_back(arr[I]);
+            freq[digit] = digitArr;
+        }
+    }
+
+    int J = 0;
+    for (int I = 0; I <= 9; I++) {
+        if(freq.contains(I)) {
+            const auto& digitArr = freq[I];
+            cout << endl << I << ":";
+            for(const auto& e : digitArr){
+                arr[J] = e;
+                J++;
+                cout << e << " ";
+            }  
+        }             
+    }
+    
+    cout << endl;
+    for(int I = 0; I < n; I++) {
+        cout << arr[I] << " ";
+    }
+    cout << endl; */
+}
+int main()
+{
+    vector<int> arr = {170, 45, 75, 90, 802, 24, 2, 66};
+    int n = 10;
+    int expo = 1;
+    for(int I = 0; I < n; I++) {
+        cout << arr[I] << " ";
+    }
+    cout << endl;
+    countingSort(arr, n, expo);
+    for(int I = 0; I < n; I++) {
+        cout << arr[I] << " ";
+    }
+    return 0;
+}
+
+---
+
+Stock : 
+    LIFO Structure
+In Python: 
+    list -> append, pop methods 
+    to add / remove elements into/from stack 
+In C++:
+    stack structure from <stack> 
+    push(), pop(), top(), empty()
+In Java:
+    stack object from collection lib 
+    push(), pop(), isEmpty()
+
+
+([{}]) 
