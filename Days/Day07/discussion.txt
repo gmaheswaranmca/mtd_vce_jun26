@@ -1,0 +1,97 @@
+Evaluate Reverse Polish Notation
+ie Evaluate postfix expression
+
+- 2 + 3 infix expr 
+- 2 3 + postfix expr 
+- + 2 3 prefix expr 
+
+2 + 3 * 0.1 * 50 / 5 infix 
+2 3 + 0.1 * 50 * 5 / postfix 
+/ * * + 2 3 0.1 50 5 prefix 
+
+Data 
+["2","1","+","3","*"]
+
+
+
+FUNCTION evalRPN(tokens)
+    stack ← empty
+    FOR each token
+        IF token is number
+            PUSH token
+        ELSE
+            b ← POP
+            a ← POP
+            result ← a token b
+            PUSH result
+    RETURN TOP(stack)
+
+
+Daily Temperatures
+
+8
+73 74 75 71 69 72 76 73
+1  1  4  2  1  1  0  0
+
+Monotonic Decreasing Stack
+```
+FUNCTION dailyTemperatures(T)
+    result ← array of zeros
+    stack ← empty
+
+    FOR i = 0 to n-1
+        WHILE stack not empty AND
+              T[i] > T[TOP(stack)]
+            idx ← POP(stack)
+            result[idx] ← i - idx
+        PUSH i into stack
+    RETURN result
+```
+
+Implement Queue using Stacks
+CLASS MyQueue
+    inputStack
+    outputStack
+    FUNCTION push(x)
+        PUSH x into inputStack
+    FUNCTION pop()
+        IF outputStack empty
+            WHILE inputStack not empty
+                PUSH POP(inputStack) into outputStack
+        RETURN POP(outputStack)
+    FUNCTION peek()
+        IF outputStack empty
+            WHILE inputStack not empty
+                PUSH POP(inputStack) into outputStack
+        RETURN TOP(outputStack)
+    FUNCTION empty()
+        RETURN inputStack empty AND outputStack empty
+
+
+Design Circular Queue
+CLASS MyCircularQueue
+    queue[k]
+    front = 0
+    rear = -1
+    size = 0
+    FUNCTION enQueue(value)
+        IF size == k
+            RETURN False
+        rear = (rear + 1) mod k
+        queue[rear] = value
+        size++
+        RETURN True
+    FUNCTION deQueue()
+        IF size == 0
+            RETURN False
+        front = (front + 1) mod k
+        size--
+        RETURN True
+    FUNCTION Front()
+        IF size == 0
+            RETURN -1
+        RETURN queue[front]
+    FUNCTION Rear()
+        IF size == 0
+            RETURN -1
+        RETURN queue[rear]
