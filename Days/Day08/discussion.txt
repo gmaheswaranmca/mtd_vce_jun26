@@ -1,0 +1,185 @@
+1-> 2-> 3-> 4-> x
+h
+key = 3
+
+for each val in arr
+    new_node = new Node(val)
+    if head == NULL
+        head = new_node 
+        tail = new_node 
+    else 
+        tail.next = new_node 
+        tail = new_node 
+e = head
+found = False  
+while e != NULL 
+    if e.data == key 
+        found = True 
+        break 
+    e = e.next
+if found 
+    print "True"
+else 
+    print "False"
+
+
+
+Doubly Linked List 
+n = 
+arr = 
+
+for val in arr 
+    new_node = new Node(val)
+    if head == NULL 
+        head = new_node 
+        tail = new_node 
+    else 
+        tail.next = new_node 
+        new_node.prev = tail 
+        tail = new_node 
+e = head 
+while e != NULL 
+    if e != head 
+        print " "
+    print e.data 
+    e = e.next 
+
+
+Reverse Linked List 
+4
+10 20 30 40
+
+
+---
+
+N
+arr
+head 
+
+# reversal of linked list (in-place)
+```psuedo 
+prev = NULL 
+curr = head 
+while curr != NULL 
+    next = curr.next 
+    
+    curr.next = prev
+    prev = curr 
+    curr = next 
+head = prev 
+
+print the list 
+```
+
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        slow = head
+        fast = head 
+        while fast != None and fast.next != None:
+            slow = slow.next 
+            fast = fast.next.next
+            if slow == fast:
+                return True 
+        return False
+
+Split Circular Linked List into Two Halves
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def split_list(head):
+    # Write your logic here
+    slow = head 
+    fast = head 
+    while fast.next != head and fast.next.next != head: 
+        fast = fast.next.next 
+        slow = slow.next 
+    if fast.next.next == head:
+        fast = fast.next 
+    head1 = head 
+    head2 = slow.next
+    slow.next = head1
+    fast.next = head2 
+    return head1, head2
+
+
+---
+
+factoiral 
+```pseudo 
+routine fact(n) 
+    if n <= 1 
+        return 1
+    return n * fact(n-1)
+```
+
+```py
+def fact(n):
+    if n <== 1:
+        return 1 
+    return n * fact(n-1);
+```
+
+
+#include <iostream>
+using namespace std;
+int fact(int n) { 
+    if(n <= 1) {
+        return 1;
+    }
+    return n * fact(n - 1);
+}
+int ifact(int n) { 
+    int r = 1;
+    for(int i = n; i >= 1; i--) {
+        r *= i;
+    }
+    return r;
+}
+int main() {
+    int n;
+    cin >> n;
+    cout << "Factorial (Non-Recursive): " << ifact(n) << endl;
+    cout << "Factorial (Recursive): " << fact(n);
+    return 0;
+}
+
+---
+
+def fibonocci(n):
+    if n < 0 :
+        return -1
+    if n == 1: 
+        return 0
+    if n == 2:
+        return 1
+    return fibonocci(n-1) + fibonocci(n-2)
+
+n = int(input())
+print(f'{n}th Fibonacci term = {fibonocci(n)}')
+
+---
+
+class Solution:
+    def backtrack(self, nums: List[int], index:int, n:int,
+        current:List[int], answer:List[List]) :
+        if index == n:
+            answer.append(list(current))
+            return 
+        current.append(nums[index])
+        self.backtrack(nums, index + 1, n, current, answer)
+        current.pop()
+        self.backtrack(nums, index+1, n, current, answer)
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        current = []
+        answer = []
+        self.backtrack(nums, 0, len(nums), current, answer)
+        return answer 
+
+
+
+
+
+
