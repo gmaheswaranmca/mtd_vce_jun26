@@ -95,3 +95,53 @@ CLASS MyCircularQueue
         IF size == 0
             RETURN -1
         RETURN queue[rear]
+
+
+----
+
+Create a Linked List (Singly Linked List)
+for each x
+    new_node = new Node(x)
+    if head == NULL
+        head = new_node
+        tail = new_node 
+    else 
+        tail.next = new_node 
+        tail = new_node 
+e = head 
+while e != NULL 
+    if e != head 
+        print(" ")
+    print(e.data)
+    e = e.next 
+
+
+5
+10 20 30 40 50
+
+
+---
+routine insert(head, val, pos)   # 0-based index
+    new_node = new Node(val)
+
+    # Insert at beginning
+    if pos == 0
+        new_node.next = head
+        head = new_node
+        return head
+
+    # Move to node at position pos-1
+    node = head
+    i = 0
+    while node != NULL and i < pos - 1
+        node = node.next
+        i = i + 1
+
+    # Invalid position
+    if node == NULL
+        return head
+
+    new_node.next = node.next
+    node.next = new_node
+
+    return head
