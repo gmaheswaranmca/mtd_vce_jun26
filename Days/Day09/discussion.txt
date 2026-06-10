@@ -29,34 +29,86 @@ FUNCTION hasConflict(row, col, cols, diag1, diag2)
        (row - col) IN diag1 OR
        (row + col) IN diag2
         RETURN TRUE
+    END IF
     RETURN FALSE
+END FUNCTION
 FUNCTION updateRowCol(row, col, cols, diag1, diag2)
     ADD col TO cols
     ADD (row - col) TO diag1
     ADD (row + col) TO diag2
+END FUNCTION
 FUNCTION removeRowCol(row, col, cols, diag1, diag2)
     REMOVE col FROM cols
     REMOVE (row - col) FROM diag1
     REMOVE (row + col) FROM diag2
-FUNCTION backtrack(row, n, board, cols, diag1, diag2)
+END FUNCTION
+FUNCTION backtrack(row, n, board, cols, diag1, diag2, result)
     IF row = n THEN
-        RETURN true 
+        ADD current board configuration TO result
+        RETURN
+    END IF
     FOR col ← 0 TO n-1
         IF hasConflict(row, col, cols, diag1, diag2) THEN
             CONTINUE
+        END IF
         updateRowCol(row, col, cols, diag1, diag2)
         board[row][col] ← 'Q'
-        result = backtrack(row + 1, n, board, cols, diag1, diag2)
-        if result:
-            return true 
+        backtrack(row + 1, n, board, cols, diag1, diag2, result)
         board[row][col] ← '.'
         removeRowCol(row, col, cols, diag1, diag2)
-    return result 
+    END FOR    
+END FUNCTION
 FUNCTION solveNQueens(n)
+    result ← empty list
     board ← n × n board filled with '.'
     cols ← empty set
     diag1 ← empty set
     diag2 ← empty set
-    result = backtrack(0, n, board, cols, diag1, diag2)
-    RETURN result
+    backtrack(0, n, board, cols, diag1, diag2, result)
+    RETURN length of result > 0
 END FUNCTION
+
+---
+
+python 
+class Solution:
+    def isConflict(self, row, col, cols, diag1, diag2):
+        if col in cols or (row-col) in diag1 or (row+col) in diag2:
+           return True 
+        return False 
+    def updateRowCol(self, row, col, cols, diag1, diag2):
+        cols.add(col)
+        diag1.add(row-col)
+        diag2.add(row+col)
+    def removeRowCol(self, row, col, cols, diag1, diag2):
+        cols.remove(col)
+        diag1.remove(row-col)
+        diag2.remove(row+col)
+    def bt(self, row, n, board, cols, diag1, diag2, res):
+        if row == n:
+            board_solved = [''.join(r) for r in board]
+            res.append(board_solved)
+            return             
+        for col in range(n):
+            if self.isConflict(row, col, cols, diag1, diag2):
+                continue 
+            board[row][col] = 'Q'
+            self.updateRowCol(row, col, cols, diag1, diag2)
+            self.bt(row + 1, n, board, cols, diag1, diag2, res)
+            board[row][col] = '.'
+            self.removeRowCol(row, col, cols, diag1, diag2)
+        
+    def solve(self, n):
+        res = []
+        board=[['.']*n for row in range(n)] # n x n
+        cols = set()
+        diag1 = set()
+        diag2 = set() 
+        self.bt(0, n, board, cols, diag1, diag2, res)
+        return len(res) > 0
+n = int(input())
+solution = Solution()
+if solution.solve(n):
+    print('YES')
+else:
+    print('NO')
