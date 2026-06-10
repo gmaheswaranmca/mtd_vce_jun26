@@ -24,15 +24,26 @@ class Solution:
 ---
 
 n-queen 
-
+FUNCTION hasConflict(row, col, cols, diag1, diag2)
+    IF (col IN cols) OR
+       (row - col) IN diag1 OR
+       (row + col) IN diag2
+        RETURN TRUE
+    RETURN FALSE
+FUNCTION updateRowCol(row, col, cols, diag1, diag2)
+    ADD col TO cols
+    ADD (row - col) TO diag1
+    ADD (row + col) TO diag2
+FUNCTION removeRowCol(row, col, cols, diag1, diag2)
+    REMOVE col FROM cols
+    REMOVE (row - col) FROM diag1
+    REMOVE (row + col) FROM diag2
 FUNCTION backtrack(row, n, board, cols, diag1, diag2)
     IF row = n THEN
         RETURN true 
-    END IF
     FOR col ← 0 TO n-1
         IF hasConflict(row, col, cols, diag1, diag2) THEN
             CONTINUE
-        END IF
         updateRowCol(row, col, cols, diag1, diag2)
         board[row][col] ← 'Q'
         result = backtrack(row + 1, n, board, cols, diag1, diag2)
@@ -40,6 +51,12 @@ FUNCTION backtrack(row, n, board, cols, diag1, diag2)
             return true 
         board[row][col] ← '.'
         removeRowCol(row, col, cols, diag1, diag2)
-    END FOR    
     return result 
+FUNCTION solveNQueens(n)
+    board ← n × n board filled with '.'
+    cols ← empty set
+    diag1 ← empty set
+    diag2 ← empty set
+    result = backtrack(0, n, board, cols, diag1, diag2)
+    RETURN result
 END FUNCTION
