@@ -1,0 +1,21 @@
+class Solution:
+    def bt(self, nums, n, used, path, res):
+        if len(path) == n:
+            pathCopy = list(path)
+            res.append(pathCopy)
+            return 
+        for I in range(n):
+            if used[I]:
+                continue 
+            path.append(nums[I])
+            used[I] = True 
+            self.bt(nums, n, used, path, res)
+            path.pop()
+            used[I] = False 
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        res = [] # [[]]
+        path = [] 
+        n = len(nums)
+        used = [False for e in range(n)]
+        self.bt(nums, n, used, path, res)
+        return res 
