@@ -1,4 +1,4 @@
-# Binary Tree – Complete Explanation
+v Binary Tree – Complete Explanation
 
 ## 1. What is a Binary Tree?
 
