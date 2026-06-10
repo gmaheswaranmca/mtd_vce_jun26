@@ -475,7 +475,7 @@ FUNCTION backtrack(row, n, board, cols, diag1, diag2, result)
         backtrack(row + 1, n, board, cols, diag1, diag2, result)
         board[row][col] ← '.'
         removeRowCol(row, col, cols, diag1, diag2)
-    END FOR
+    END FOR    
 END FUNCTION
 FUNCTION solveNQueens(n)
     result ← empty list

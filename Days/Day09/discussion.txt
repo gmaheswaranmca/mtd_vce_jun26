@@ -19,3 +19,27 @@ class Solution:
         used = [False for e in range(n)]
         self.bt(nums, n, used, path, res)
         return res 
+
+
+---
+
+n-queen 
+
+FUNCTION backtrack(row, n, board, cols, diag1, diag2)
+    IF row = n THEN
+        RETURN true 
+    END IF
+    FOR col ← 0 TO n-1
+        IF hasConflict(row, col, cols, diag1, diag2) THEN
+            CONTINUE
+        END IF
+        updateRowCol(row, col, cols, diag1, diag2)
+        board[row][col] ← 'Q'
+        result = backtrack(row + 1, n, board, cols, diag1, diag2)
+        if result:
+            return true 
+        board[row][col] ← '.'
+        removeRowCol(row, col, cols, diag1, diag2)
+    END FOR    
+    return result 
+END FUNCTION
