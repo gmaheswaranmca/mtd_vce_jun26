@@ -1,0 +1,155 @@
+    def inorder(self, node, result:List[int]):
+        if node == None:
+            return 
+        self.inorder(node.left, result)
+        result.append(node.val)
+        self.inorder(node.right, result)
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        result = []
+        self.inorder(root, result)
+        return result
+
+
+---
+
+    def preorder(self, node, result:List[int]):
+        if node == None:
+            return
+        result.append(node.val) 
+        self.preorder(node.left, result)
+        self.preorder(node.right, result)
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        result = []
+        self.preorder(root, result)
+        return result
+
+---
+
+    def postorder(self, node, result:List[int]):
+        if node == None:
+            return
+        self.postorder(node.left, result)
+        self.postorder(node.right, result)        
+        result.append(node.val) 
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        result = []
+        self.postorder(root, result)
+        return result
+
+---
+class Solution {
+    public void preorder(TreeNode node, List<Integer> result) {
+        if(node == null) { 
+            return;
+        }
+        result.add(node.val);
+        preorder(node.left, result);
+        preorder(node.right, result);
+    }
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        preorder(root, result);
+        return result;
+    }
+}
+
+---
+class Solution {
+    public void postorder(TreeNode node, List<Integer> result) {
+        if(node == null) { 
+            return;
+        }        
+        postorder(node.left, result);
+        postorder(node.right, result);
+        result.add(node.val);
+    }
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        postorder(root, result);
+        return result;
+    }
+}
+
+class Solution {
+public:
+    void postorder(TreeNode* node, vector<int>& result) {
+        if(node == nullptr) {
+            return;
+        }
+        postorder(node->left, result);
+        postorder(node->right, result);
+        result.push_back(node->val);
+    }
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> result;
+        postorder(root, result);
+        return result;
+    }
+};
+
+---
+
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        queue = deque()
+        if root != None:
+            queue.append(root)
+        result = []
+        while queue:
+            level = []
+            size = len(queue)
+            for I in range(size):
+                node = queue.popleft()
+                level.append(node.val)
+                if node.left != None:
+                    queue.append(node.left)
+                if node.right != None:
+                    queue.append(node.right)
+            result.append(level)
+        return result
+
+---
+
+
+class Solution:
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        if root == None:
+            return False 
+        targetSum = targetSum - root.val
+        if root.left == None and root.right == None:
+            return targetSum == 0
+        return self.hasPathSum(root.left, targetSum) or self.hasPathSum(root.right, targetSum)
+
+----
+class Solution:
+    def dfs(self, node, target, path, result): 
+        if node == None:
+            return 
+        path.append(node.val)
+        target = target - node.val 
+        if node.left == None and node.right == None and target == 0:
+            result.append(list(path))
+        else:
+            self.dfs(node.left, target, path, result)
+            self.dfs(node.right, target, path, result)        
+        path.pop()
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        result = []
+        path = []
+        self.dfs(root, targetSum, path, result)
+        return result 
+
+---
+class Solution:
+    def doSum(self, node, current):
+        if node == None:
+            return 0
+        current = current * 10 + node.val 
+        if node.left == None and node.right == None:
+            return current 
+        leftSum = self.doSum(node.left, current)
+        rightSum = self.doSum(node.right, current)
+        return leftSum + rightSum 
+    def sumNumbers(self, root: Optional[TreeNode]) -> int:
+        current = 0
+        return self.doSum(root,current)
