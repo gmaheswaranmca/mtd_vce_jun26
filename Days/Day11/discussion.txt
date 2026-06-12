@@ -1,0 +1,52 @@
+class Solution:
+    def insert(self, node, val):
+        if node == None:
+            new_node = TreeNode(val)
+            return new_node 
+        if val < node.val:
+            node.left = self.insert(node.left, val)
+        else:
+            node.right = self.insert(node.right, val)
+        return node 
+    def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        new_root = self.insert(root, val)
+        return new_root
+
+
+----
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def insert(self, node, val):
+        if node == None:
+            new_node = TreeNode(val)
+            return new_node 
+        if val < node.val:
+            node.left = self.insert(node.left, val)
+        else:
+            node.right = self.insert(node.right, val)
+        return node
+    def insertByBsearch(self, root, nums, left, right):
+        if left > right:
+            return root
+        mid =left + ((right - left) // 2)
+        root = self.insert(root, nums[mid])
+        root = self.insertByBsearch(root, nums, left, mid-1)
+        root = self.insertByBsearch(root, nums, mid+1, right)
+        return root
+    def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
+        left = 0
+        right = len(nums) - 1
+        root = None
+        root = self.insertByBsearch(root, nums, left, right)
+        return root
+        
+            
+             
+            
+        
