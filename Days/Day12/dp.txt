@@ -13,7 +13,7 @@ Key Concepts
         from optimal solutions to its subproblems.
 
 How Dynamic Programming Works
-    - Memoization (Top-Down Approach):  
+    - Memorization (Top-Down Approach):  
         Store the results of expensive function calls and 
         return the cached result when the same inputs occur again. 
         Usually implemented with recursion and a cache (like a dictionary).
